@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Node{
+public:
+    int data;
+    Node *left;
+    Node *right;
+
+};
+
+
+Node *CreateTree(Node *root,int d)
+{
+  if(root==NULL)
+  {
+    root = new Node();
+    root->data = d;
+    root->right = root->left = NULL;
+    return root;
+  }  
+  if(d<root->data)
+  {
+    root->left = CreateTree(root->left,d);
+  }
+  else
+  {
+    root->right = CreateTree(root->right,d);
+  }
+  return root;
+}
+
+void Inorder(Node *root)
+{
+    if(root==NULL)
+        return ;
+
+        Inorder(root->left);
+         cout<<root->data<<" ";
+        Inorder(root->right);
+
+
+
+}
+
+int main()
+{
+    Node *root = NULL;
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        int data;
+        cin>>data;
+        root = CreateTree(root,data);
+    }
+    Inorder(root);
+}
